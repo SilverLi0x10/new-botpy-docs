@@ -1,5 +1,11 @@
 # 内联键盘类型
 
+**Source file:** [`botpy/types/inline.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/inline.py)
+
+**Related types:** [Message](message.md) — `KeyboardPayload`
+
+---
+
 ## Keyboard 结构
 
 ```python
@@ -10,6 +16,8 @@ class KeyboardRow(TypedDict):
     buttons: List[Button]
 ```
 
+---
+
 ## Button
 
 ```python
@@ -19,6 +27,8 @@ class Button(TypedDict):
     action: Action             # 行为定义
 ```
 
+---
+
 ## RenderData
 
 ```python
@@ -27,6 +37,8 @@ class RenderData(TypedDict):
     visited_label: str  # 点击后标签
     style: int          # 样式（0=灰色, 1=蓝色）
 ```
+
+---
 
 ## Action
 
@@ -39,6 +51,8 @@ class Action(TypedDict):
     at_bot_show_channel_list: bool  # 是否展示频道列表
 ```
 
+---
+
 ## Permission
 
 ```python
@@ -47,6 +61,8 @@ class Permission(TypedDict):
     specify_role_ids: List[str]   # 指定身份组 ID
     specify_user_ids: List[str]   # 指定用户 ID
 ```
+
+---
 
 ## 构建示例
 
