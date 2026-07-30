@@ -65,4 +65,4 @@ python bot.py
 
 ## 完整示例参考
 
-更多使用场景（如 ARK 消息、Embed 消息、Markdown、键盘按钮等），请参考 [示例](../examples/index.md) 章节。
+更多使用场景（如 ARK 消息、Embed 消息、Markdown、键盘按钮等），请参考 [示例](/examples/) 章节。

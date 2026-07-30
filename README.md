@@ -1,15 +1,20 @@
 ---
-home: true
-heroImage: https://github.com/tencent-connect/bot-docs/raw/main/docs/.vuepress/public/favicon-64px.png
-heroText: QQ Bot Python SDK
-tagline: 基于机器人开放平台API实现的QQ机器人框架
-actions:
-  - text: 快速开始
-    link: /guide/
-    type: primary
-  - text: API 参考
-    link: /api/
-    type: secondary
+layout: home
+
+hero:
+  name: QQ Bot Python SDK
+  text: 基于机器人开放平台API实现的QQ机器人框架
+  image:
+    src: https://github.com/tencent-connect/bot-docs/raw/main/docs/.vuepress/public/favicon-64px.png
+    alt: QQ Bot Python SDK
+  actions:
+    - theme: brand
+      text: 快速开始
+      link: /guide/
+    - theme: alt
+      text: API 参考
+      link: /api/
+
 features:
   - title: 简单易用
     details: 简洁的 API 设计，只需继承 Client 类并实现事件处理方法即可快速构建机器人。
@@ -23,7 +28,6 @@ features:
     details: 内置指令系统、定时任务、YAML配置、颜色转换等实用扩展模块。
   - title: 示例完善
     details: 20+ 完整示例代码，覆盖各种消息类型和业务场景。
-footer: MIT Licensed | Copyright © 2022 Tencent
 ---
 
 ## 快速上手
