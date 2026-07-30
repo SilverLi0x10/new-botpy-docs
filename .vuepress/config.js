@@ -1,8 +1,22 @@
 import { defineUserConfig } from 'vuepress'
 import { defaultTheme } from '@vuepress/theme-default'
 import { viteBundler } from '@vuepress/bundler-vite'
+import { searchPlugin } from '@vuepress/plugin-search'
 
 export default defineUserConfig({
+  plugins: [
+    searchPlugin({
+      locales: {
+        '/': {
+          placeholder: '搜索文档',
+        },
+      },
+      // 最大建议数
+      maxSuggestions: 10,
+      // 排除首页
+      isSearchable: (page) => page.path !== '/',
+    }),
+  ],
   lang: 'zh-CN',
   title: 'QQ Bot Python SDK',
   description: '基于机器人开放平台API实现的QQ机器人框架',
