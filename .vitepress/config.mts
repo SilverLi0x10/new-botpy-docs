@@ -2,10 +2,11 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'QQ Bot Python SDK',
+  title: 'QQBot',
   description: '基于机器人开放平台API实现的QQ机器人框架',
   base: '/botpy/',
   cleanUrls: true,
+  ignoreDeadLinks: true,
 
   head: [
     ['link', { rel: 'icon', href: 'https://github.com/tencent-connect/bot-docs/raw/main/docs/.vuepress/public/favicon-64px.png' }],

@@ -1,0 +1,267 @@
+/* ============================================
+   Custom Theme — QQ Bot Python SDK Docs
+   Colorful homepage with background image
+   ============================================ */
+
+/* ─── Homepage Background Image + Gradient ─── */
+.VPHome {
+  /* Base gradient overlay (always works, even without image) */
+  background:
+    /* Top-left accent glow */
+    radial-gradient(ellipse at 0% 0%, rgba(102, 126, 234, 0.15) 0%, transparent 60%),
+    /* Bottom-right accent glow */
+    radial-gradient(ellipse at 100% 100%, rgba(118, 75, 218, 0.12) 0%, transparent 60%),
+    /* Center warm glow */
+    radial-gradient(ellipse at 50% 50%, rgba(255, 118, 117, 0.06) 0%, transparent 50%),
+    /* Background image — dotted grid pattern (base64 SVG, tiny footprint) */
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237c3aed' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    /* Solid base color */
+    #fafaff;
+
+  padding-bottom: 0;
+}
+
+/* ─── Hero Section ─── */
+.VPHomeHero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative floating shapes behind the hero */
+.VPHomeHero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.12), rgba(255, 118, 117, 0.08));
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.VPHomeHero::after {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -8%;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, rgba(118, 75, 218, 0.10), rgba(72, 199, 142, 0.08));
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hero heading — gradient text */
+.VPHomeHero .name {
+  position: relative;
+  z-index: 1;
+}
+
+.VPHomeHero .name .clip {
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroGradientShift 6s ease-in-out infinite alternate;
+}
+
+@keyframes heroGradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hero subtitle */
+.VPHomeHero .text {
+  position: relative;
+  z-index: 1;
+  color: #4a4a6a;
+}
+
+/* Hero tagline */
+.VPHomeHero .tagline {
+  position: relative;
+  z-index: 1;
+  color: #6b6b8a;
+}
+
+/* Hero actions / buttons */
+.VPHomeHero .actions {
+  position: relative;
+  z-index: 1;
+}
+
+/* Brand button — gradient */
+.VPHomeHero .actions .brand {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.VPHomeHero .actions .brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Alt button */
+.VPHomeHero .actions .alt {
+  border-color: #667eea;
+  color: #667eea;
+  transition: all 0.2s ease;
+}
+
+.VPHomeHero .actions .alt:hover {
+  background: rgba(102, 126, 234, 0.08);
+  border-color: #764ba2;
+  color: #764ba2;
+}
+
+/* ─── Features Section ─── */
+.VPHomeFeatures {
+  position: relative;
+  z-index: 1;
+  padding-top: 48px;
+}
+
+/* Feature card — glassmorphism with colorful accents */
+.VPHomeFeatures .VPFeature {
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 28px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient border on hover */
+.VPHomeFeatures .VPFeature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.VPHomeFeatures .VPFeature:hover::before {
+  opacity: 1;
+}
+
+.VPHomeFeatures .VPFeature:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 12px 40px rgba(102, 126, 234, 0.12),
+    0 4px 12px rgba(118, 75, 218, 0.08);
+}
+
+/* Feature icon — colorful */
+.VPHomeFeatures .VPFeature .icon {
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  color: #fff !important;
+  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.VPHomeFeatures .VPFeature:hover .icon {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Feature title */
+.VPHomeFeatures .VPFeature .title {
+  color: #2c2c54;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Feature detail text */
+.VPHomeFeatures .VPFeature .details {
+  color: #6b6b8a;
+  font-size: 0.95em;
+  line-height: 1.6;
+}
+
+/* ─── Quick-start Code Block Section ─── */
+.VPHome .content .main > h2 {
+  position: relative;
+  z-index: 1;
+  color: #2c2c54;
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 64px;
+  margin-bottom: 24px;
+}
+
+.VPHome .content .main > h2::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+/* ─── Dark Mode Adjustments ─── */
+.dark .VPHome {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(102, 126, 234, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 100%, rgba(118, 75, 218, 0.08) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237c3aed' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+    #0f0f1a;
+}
+
+.dark .VPHomeHero .text {
+  color: #c8c8e0;
+}
+
+.dark .VPHomeHero .tagline {
+  color: #9999b8;
+}
+
+.dark .VPHomeFeatures .VPFeature {
+  background: rgba(30, 30, 50, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.dark .VPHomeFeatures .VPFeature:hover {
+  background: rgba(40, 40, 65, 0.9);
+  box-shadow:
+    0 12px 40px rgba(102, 126, 234, 0.08),
+    0 4px 12px rgba(118, 75, 218, 0.06);
+}
+
+.dark .VPHomeFeatures .VPFeature .title {
+  color: #e0e0f0;
+}
+
+.dark .VPHomeFeatures .VPFeature .details {
+  color: #a0a0c0;
+}
+
+.dark .VPHome .content .main > h2 {
+  color: #e0e0f0;
+}
