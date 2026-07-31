@@ -81,12 +81,12 @@ class MyClient(botpy.Client):
 | `on_at_message_create` | `parse_at_message_create` | `Message` | [`botpy/message.py`](../models/message.md) |
 | `on_guild_member_add` | `parse_guild_member_add` | `Member` | [`botpy/user.py`](../models/user.md) |
 | `on_message_reaction_add` | `parse_message_reaction_add` | `Reaction` | [`botpy/reaction.py`](../models/other.md#reaction-表情表态) |
-| `on_audio_start` | `parse_audio_start` | `Audio` | [`botpy/audio.py`](../models/other.md#audiocontrol-音频控制) |
+| `on_audio_start` | `parse_audio_start` | `Audio` | [`botpy/audio.py`](../models/other.md#audio-音频控制) |
 | `on_forum_thread_create` | `parse_forum_thread_create` | `Thread` | [`botpy/forum.py`](../models/forum.md) |
 | `on_interaction_create` | `parse_interaction_create` | `Interaction` | [`botpy/interaction.py`](../models/other.md#interaction) |
 | `on_group_at_message_create` | `parse_group_at_message_create` | `GroupMessage` | [`botpy/message.py`](../models/message.md) |
 | `on_c2c_message_create` | `parse_c2c_message_create` | `C2CMessage` | [`botpy/message.py`](../models/message.md) |
 | `on_group_add_robot` | `parse_group_add_robot` | `GroupManageEvent` | [`botpy/manage.py`](group-manage.md) |
 | `on_friend_add` | `parse_friend_add` | `C2CManageEvent` | [`botpy/manage.py`](group-manage.md) |
-| `on_audio_or_live_channel_member_enter` | `parse_audio_or_live_channel_member_enter` | `PublicAudio` | [`botpy/audio.py`](../models/other.md#audiocontrol-音频控制) |
+| `on_audio_or_live_channel_member_enter` | `parse_audio_or_live_channel_member_enter` | `PublicAudio` | [`botpy/audio.py`](../models/other.md#audio-音频控制) |
 | `on_open_forum_thread_create` | `parse_open_forum_thread_create` | `OpenThread` | [`botpy/forum.py`](../models/forum.md) |

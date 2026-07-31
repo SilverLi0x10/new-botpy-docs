@@ -70,18 +70,18 @@ class SpeakPermission(Enum):
 
 ```python
 class ChannelPayload(TypedDict):
-    id: str
-    guild_id: str
-    name: str
-    type: ChannelType
-    sub_type: ChannelSubType
-    position: int
-    parent_id: str
-    owner_id: str
-    private_type: PrivateType
-    speak_permission: SpeakPermission
-    application_id: str
-    permissions: str
+    id: str                # 子频道 ID
+    guild_id: str          # 频道 ID
+    name: str              # 子频道名称
+    type: ChannelType      # 子频道类型
+    sub_type: ChannelSubType  # 子频道子类型
+    position: int          # 排序位置
+    parent_id: str         # 父级 ID（所属分组 ID）
+    owner_id: str          # 创建者 ID
+    private_type: PrivateType  # 私密类型
+    speak_permission: SpeakPermission  # 发言权限
+    application_id: str    # 应用子频道 AppID（仅应用子频道）
+    permissions: str       # 权限串
 ```
 
 ---
@@ -92,10 +92,10 @@ class ChannelPayload(TypedDict):
 
 ```python
 class ChannelPermissions(TypedDict):
-    channel_id: str
-    user_id: str
-    permissions: str
-    role_id: str
+    channel_id: str    # 子频道 ID
+    user_id: str       # 用户 ID
+    permissions: str   # 权限串（二进制位表示）
+    role_id: str       # 身份组 ID
 ```
 
 ---

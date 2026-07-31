@@ -31,20 +31,20 @@ class GuildPayload(TypedDict):
 class Role(TypedDict):
     id: str                # 身份组 ID
     name: str              # 身份组名称
-    color: int             # 颜色
-    hoist: int             # 是否在成员列表中单独展示
+    color: int             # ARGB 颜色值（十进制）
+    hoist: int             # 是否在成员列表中单独展示（0=否, 1=是）
     number: int            # 人数
     number_limit: int      # 人数上限
 
 class GuildRole(TypedDict):
-    guild_id: str
-    role_id: str
-    role: Role
+    guild_id: str        # 频道 ID
+    role_id: str         # 身份组 ID
+    role: Role           # 身份组详细信息
 
 class GuildRoles(TypedDict):
-    guild_id: str
-    roles: List[Role]
-    role_num_limit: str
+    guild_id: str            # 频道 ID
+    roles: List[Role]        # 身份组列表
+    role_num_limit: str      # 身份组数量限制
 ```
 
 ---

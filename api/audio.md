@@ -20,7 +20,7 @@ async def update_audio(
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | channel_id | str | 必填 | 音频播放的子频道 ID |
-| audio_control | [`AudioControl`](../models/other.md#audiocontrol-音频控制) | 必填 | 音频控制参数 |
+| audio_control | [`AudioControl`](../models/other.md#audio-音频控制) | 必填 | 音频控制参数 |
 
 **AudioControl**:
 | 字段 | 类型 | 说明 |

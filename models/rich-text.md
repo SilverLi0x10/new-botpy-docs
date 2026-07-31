@@ -51,11 +51,11 @@ class ParagraphProps(TypedDict):
 
 ```python
 class Elem(TypedDict):
-    text: TextElem
-    image: ImageElem
-    video: VideoElem
-    url: URLElem
-    type: ElemType
+    type: ElemType   # 元素类型（1=文本, 2=图片, 3=视频, 4=url）
+    text: TextElem   # 文本元素（type=1 时有效）
+    image: ImageElem # 图片元素（type=2 时有效）
+    video: VideoElem # 视频元素（type=3 时有效）
+    url: URLElem     # URL 元素（type=4 时有效）
 ```
 
 ---
@@ -64,8 +64,8 @@ class Elem(TypedDict):
 
 ```python
 class TextElem(TypedDict):
-    text: str
-    props: TextProps
+    text: str        # 文本内容
+    props: TextProps # 文本属性
 
 class TextProps(TypedDict):
     font_bold: bool    # 粗体
@@ -124,8 +124,8 @@ class PlatVideo(TypedDict):
 
 ```python
 class URLElem(TypedDict):
-    url: str
-    desc: str
+    url: str    # 跳转 URL
+    desc: str   # 描述文本
 ```
 
 ---
@@ -136,12 +136,12 @@ class URLElem(TypedDict):
 
 ```python
 class RichObject(TypedDict):
-    type: RichType       # 1=文本, 2=@信息, 3=url, 4=表情, 5=#子频道, 10=视频, 11=图片
-    text_info: TextInfo
-    at_info: AtInfo
-    url_info: URLInfo
-    emoji_info: EmojiInfo
-    channel_info: ChannelInfo
+    type: RichType              # 富文本类型（1=文本, 2=@信息, 3=url, 4=表情, 5=#子频道, 10=视频, 11=图片）
+    text_info: TextInfo         # 文本信息
+    at_info: AtInfo             # @信息
+    url_info: URLInfo           # URL 信息
+    emoji_info: EmojiInfo       # 表情信息
+    channel_info: ChannelInfo   # 子频道信息
 ```
 
 ---

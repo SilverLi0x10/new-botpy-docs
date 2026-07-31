@@ -16,7 +16,7 @@ async def get_permissions(guild_id: str) -> List[APIPermission]
 |------|------|--------|------|
 | guild_id | str | 必填 | 要获取权限列表的频道 ID |
 
-**返回**: List[[`APIPermission`](../models/other.md#apipermission)]
+**返回**: List[[`APIPermission`](../models/other.md#apipermission-api-权限)]
 
 **返回字段**:
 | 字段 | 类型 | 说明 |
@@ -47,7 +47,7 @@ async def post_permission_demand(
 |------|------|--------|------|
 | guild_id | str | 必填 | 创建权限请求的频道 ID |
 | channel_id | str | 必填 | 需要发送权限请求的子频道 ID |
-| api_identify | [`APIPermissionDemandIdentify`](../models/other.md#apipermission) | 必填 | API 权限需求标识 |
+| api_identify | [`APIPermissionDemandIdentify`](../models/other.md#apipermission-api-权限) | 必填 | API 权限需求标识 |
 | desc | str | 必填 | 权限请求的描述 |
 
 **APIPermissionDemandIdentify**:
@@ -55,7 +55,7 @@ async def post_permission_demand(
 {"path": "/guilds/{guild_id}/members/{user_id}", "method": "GET"}
 ```
 
-**返回**: [`APIPermissionDemand`](../models/other.md#apipermission)
+**返回**: [`APIPermissionDemand`](../models/other.md#apipermission-api-权限)
 
 **使用示例**:
 ```python

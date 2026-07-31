@@ -39,15 +39,15 @@ class MessagePayload(TypedDict):
 完整的消息类型（[`types/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/message.py#L74-L82)），继承自 `MessagePayload`。
 
 ```python
-class Message(TypedDict, MessagePayload):
-    edited_timestamp: str
-    mention_everyone: str
-    attachments: List[Attachment]
-    embeds: List[Embed]
-    ark: Ark
-    message_reference: Reference
-    markdown: MarkdownPayload
-    keyboard: KeyboardPayload
+class Message(MessagePayload):
+    edited_timestamp: str          # 编辑时间戳
+    mention_everyone: str          # 是否@全体成员
+    attachments: List[Attachment]   # 附件列表
+    embeds: List[Embed]            # Embed 消息列表
+    ark: Ark                       # ARK 模板消息
+    message_reference: Reference   # 消息引用
+    markdown: MarkdownPayload      # Markdown 消息
+    keyboard: KeyboardPayload      # 内联键盘
 ```
 
 ---
@@ -245,8 +245,8 @@ class MessageAuditPayload(TypedDict):
 ```python
 class DmsPayload(TypedDict):
     guild_id: str     # 私信会话的 guild_id（注意：每个私信会话是一个独立的 guild）
-    channel_id: str
-    creat_time: str
+    channel_id: str   # 私信会话的子频道 ID
+    creat_time: str   # 创建时间
 ```
 
 ---
@@ -304,10 +304,10 @@ class DeletionOperator(TypedDict):
 
 ```python
 class DeletedMessage(TypedDict):
-    guild_id: str
-    channel_id: str
-    id: str
-    author: DMOriginalAuthor
+    guild_id: str        # 频道 ID
+    channel_id: str      # 子频道 ID
+    id: str              # 被删除消息的 ID
+    author: DMOriginalAuthor  # 消息原始作者
 ```
 
 ### DeletedMessageInfo
@@ -316,8 +316,8 @@ class DeletedMessage(TypedDict):
 
 ```python
 class DeletedMessageInfo(TypedDict):
-    message: DeletedMessage
-    op_user: DeletionOperator
+    message: DeletedMessage    # 被删除的消息
+    op_user: DeletionOperator  # 删除操作者
 ```
 
 ---

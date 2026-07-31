@@ -48,19 +48,19 @@ class WsUrlPayload(TypedDict):
 
 ```python
 class Announce(TypedDict):
-    guild_id: str
-    channel_id: str
-    message_id: str
-    announces_type: AnnouncesType
-    recommend_channels: List[RecommendChannel]
+    guild_id: str                           # 频道 ID
+    channel_id: str                         # 子频道 ID
+    message_id: str                         # 消息 ID
+    announces_type: AnnouncesType           # 公告类型
+    recommend_channels: List[RecommendChannel]  # 推荐子频道列表
 
-class AnnounceType(Enum):
+class AnnouncesType(Enum):
     MEMBER = 0   # 成员公告
     WELCOME = 1  # 欢迎公告
 
 class RecommendChannel(TypedDict):
-    channel_id: str
-    introduce: str
+    channel_id: str    # 推荐子频道 ID
+    introduce: str     # 推荐语
 ```
 
 ---
@@ -74,21 +74,21 @@ AudioStatus = Literal[0, 1, 2, 3]   # 0=开始, 1=暂停, 2=继续, 3=停止
 PublicAudioType = Literal[2, 5]      # 2=音视频, 5=直播
 
 class AudioControl(TypedDict):
-    audio_url: str
-    text: str
-    status: AudioStatus
+    audio_url: str      # 音频 URL
+    text: str           # 音频文本
+    status: AudioStatus # 音频状态
 
 class AudioAction(TypedDict):
-    guild_id: str
-    channel_id: str
-    audio_url: str
-    text: str
+    guild_id: str     # 频道 ID
+    channel_id: str   # 子频道 ID
+    audio_url: str    # 音频 URL
+    text: str         # 音频文本
 
 class AudioLive(TypedDict):
-    guild_id: str
-    channel_id: str
-    channel_type: PublicAudioType  # 2=音视频, 5=直播
-    user_id: str
+    guild_id: str                    # 频道 ID
+    channel_id: str                  # 子频道 ID
+    channel_type: PublicAudioType    # 频道类型（2=音视频, 5=直播）
+    user_id: str                     # 用户 ID
 ```
 
 ---
@@ -101,8 +101,8 @@ class AudioLive(TypedDict):
 EmojiType = Literal[1, 2]   # 1=系统表情, 2=emoji表情
 
 class Emoji(TypedDict):
-    id: str
-    type: EmojiType
+    id: str        # 表情 ID
+    type: EmojiType # 表情类型（1=系统表情, 2=emoji表情）
 ```
 
 ---
@@ -113,21 +113,21 @@ class Emoji(TypedDict):
 
 ```python
 class APIPermission(TypedDict):
-    path: str
-    method: str
-    desc: str
-    auth_status: int
+    path: str        # API 路径
+    method: str      # 请求方法（GET/POST/PUT/DELETE 等）
+    desc: str        # 权限描述
+    auth_status: int # 授权状态（0=未授权, 1=已授权）
 
 class APIPermissionDemandIdentify(TypedDict):
-    path: str
-    method: str
+    path: str        # API 路径
+    method: str      # 请求方法
 
 class APIPermissionDemand(TypedDict):
-    guild_id: str
-    channel_id: str
-    api_identify: APIPermissionDemandIdentify
-    title: str
-    desc: str
+    guild_id: str                       # 频道 ID
+    channel_id: str                     # 子频道 ID
+    api_identify: APIPermissionDemandIdentify  # API 权限需求标识
+    title: str                          # 授权标题
+    desc: str                           # 授权描述
 ```
 
 ---
@@ -155,15 +155,15 @@ class PinsMessage:
 ReactionTargetType = Literal[0, 1, 2, 3]  # 0=消息, 1=帖子, 2=评论, 3=回复
 
 class ReactionTarget(TypedDict):
-    id: str
-    type: ReactionTargetType
+    id: str                # 目标 ID（消息 ID 或帖子/评论/回复 ID）
+    type: ReactionTargetType  # 目标类型
 
 class Reaction(TypedDict):
-    user_id: str
-    guild_id: str
-    channel_id: str
-    target: ReactionTarget
-    emoji: Emoji
+    user_id: str    # 用户 ID
+    guild_id: str   # 频道 ID
+    channel_id: str # 子频道 ID
+    target: ReactionTarget  # 表态目标
+    emoji: Emoji    # 表情
 
 class ReactionUsers(TypedDict):
     users: List[User]
@@ -215,16 +215,16 @@ class Robot(TypedDict):
 
 ```python
 class Session(TypedDict):
-    session_id: str
-    last_seq: int
-    intent: int
-    token: Token
-    url: str
-    shards: ShardConfig
+    session_id: str      # 会话 ID
+    last_seq: int        # 最后收到的消息序号
+    intent: int          # 事件订阅位掩码
+    token: Token         # 授权 Token
+    url: str             # WebSocket 接入地址
+    shards: ShardConfig  # 分片配置
 
 class ShardConfig(TypedDict):
-    shard_id: int
-    shard_count: int
+    shard_id: int     # 当前分片 ID
+    shard_count: int  # 总分片数
 ```
 
 ---
@@ -235,23 +235,23 @@ class ShardConfig(TypedDict):
 
 ```python
 class InteractionData:
-    type: int
-    resolved: object
+    type: int       # 数据类型
+    resolved: object  # 解析后的数据对象
 
 class InteractionPayload(TypedDict):
-    id: str
-    application_id: int
-    type: int
-    scene: str
-    chat_type: int
-    data: InteractionData
-    guild_id: int
-    channel_id: int
-    user_openid: str
-    group_openid: str
-    group_member_openid: str
-    timestamp: int
-    version: int
+    id: str                       # 交互 ID
+    application_id: int           # 应用 ID
+    type: int                     # 交互类型
+    scene: str                    # 场景
+    chat_type: int                # 聊天类型
+    data: InteractionData         # 交互数据
+    guild_id: int                 # 频道 ID
+    channel_id: int               # 子频道 ID
+    user_openid: str              # 用户 openid
+    group_openid: str             # 群组 openid
+    group_member_openid: str      # 群成员 openid
+    timestamp: int                # 时间戳
+    version: int                  # 版本
 
 class InteractionType(Enum):
     PING = 1

@@ -38,7 +38,7 @@ async def post_message(
     msg_id: str = None,
     event_id: str = None,
     markdown: message.MarkdownPayload = None,
-    keyboard: message.Keyboard = None,
+    keyboard: message.KeyboardPayload = None,
 ) -> message.Message
 ```
 
@@ -54,7 +54,7 @@ async def post_message(
 | `msg_id` | `Optional[str]` | `None` | 回复消息 ID（被动回复使用） |
 | `event_id` | `Optional[str]` | `None` | 事件 ID |
 | `markdown` | [`Optional[MarkdownPayload]`](../models/message.md#markdownpayload) | `None` | Markdown 消息 |
-| `keyboard` | [`Optional[Keyboard]`](../models/message.md#keyboardpayload) | `None` | 内联键盘 |
+| `keyboard` | [`Optional[KeyboardPayload]`](../models/message.md#keyboardpayload) | `None` | 内联键盘 |
 
 **返回**: [`Message`](../models/message.md#message-类型) — 消息字典对象
 

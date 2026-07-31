@@ -154,6 +154,6 @@ schedule = await self.api.create_schedule(
     start_timestamp=start_time,
     end_timestamp=end_time,
     jump_channel_id=channel_schedule_id,
-    remind_type="0",
+    remind_type=0,
 )
 ```

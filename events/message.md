@@ -79,7 +79,7 @@ async def on_direct_message_create(self, message: DirectMessage)
 **事件触发详情**
 
 - **触发解析**: `parse_direct_message_create` → `on_direct_message_create`
-- **参数模型**: [`DirectMessage`](../models/direct-message.md) — `__slots__` 包含: `author` (嵌套 `_User`: `id`, `username`, `avatar`), `content`, `direct_message`, `channel_id`, `id`, `guild_id`, `member` (嵌套 `_Member`: `joined_at`), `message_reference` (嵌套 `_MessageRef`: `message_id`), `attachments` (列表 `_Attachments`), `seq`, `seq_in_channel`, `src_guild_id`, `timestamp`, `event_id`
+- **参数模型**: [`DirectMessage`](../models/message.md) — `__slots__` 包含: `author` (嵌套 `_User`: `id`, `username`, `avatar`), `content`, `direct_message`, `channel_id`, `id`, `guild_id`, `member` (嵌套 `_Member`: `joined_at`), `message_reference` (嵌套 `_MessageRef`: `message_id`), `attachments` (列表 `_Attachments`), `seq`, `seq_in_channel`, `src_guild_id`, `timestamp`, `event_id`
 - **源码位置**: [`connection.py` 第 156-158 行](https://github.com/tencent-connect/botpy/tree/master/botpy/connection.py#L156-L158) | [`message.py` 第 87-164 行](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py#L87-L164)
 
 ### on_direct_message_delete
@@ -93,7 +93,7 @@ async def on_direct_message_delete(self, message: DirectMessage)
 **事件触发详情**
 
 - **触发解析**: `parse_direct_message_delete` → `on_direct_message_delete`
-- **参数模型**: [`DirectMessage`](../models/direct-message.md) — `__slots__` 同 `on_direct_message_create`
+- **参数模型**: [`DirectMessage`](../models/message.md) — `__slots__` 同 `on_direct_message_create`
 - **源码位置**: [`connection.py` 第 160-162 行](https://github.com/tencent-connect/botpy/tree/master/botpy/connection.py#L160-L162) | [`message.py` 第 87-164 行](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py#L87-L164)
 
 ## 消息审核
@@ -111,7 +111,7 @@ async def on_message_audit_pass(self, message_audit: MessageAudit)
 **事件触发详情**
 
 - **触发解析**: `parse_message_audit_pass` → `on_message_audit_pass`
-- **参数模型**: [`MessageAudit`](../models/message-audit.md) — `__slots__` 包含: `audit_id`, `message_id`, `channel_id`, `guild_id`, `event_id`
+- **参数模型**: [`MessageAudit`](../models/message.md) — `__slots__` 包含: `audit_id`, `message_id`, `channel_id`, `guild_id`, `event_id`
 - **源码位置**: [`connection.py` 第 170-172 行](https://github.com/tencent-connect/botpy/tree/master/botpy/connection.py#L170-L172) | [`message.py` 第 167-187 行](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py#L167-L187)
 
 ### on_message_audit_reject
@@ -125,5 +125,5 @@ async def on_message_audit_reject(self, message_audit: MessageAudit)
 **事件触发详情**
 
 - **触发解析**: `parse_message_audit_reject` → `on_message_audit_reject`
-- **参数模型**: [`MessageAudit`](../models/message-audit.md) — `__slots__` 包含: `audit_id`, `message_id`, `channel_id`, `guild_id`, `event_id`
+- **参数模型**: [`MessageAudit`](../models/message.md) — `__slots__` 包含: `audit_id`, `message_id`, `channel_id`, `guild_id`, `event_id`
 - **源码位置**: [`connection.py` 第 174-176 行](https://github.com/tencent-connect/botpy/tree/master/botpy/connection.py#L174-L176) | [`message.py` 第 167-187 行](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py#L167-L187)

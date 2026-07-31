@@ -23,16 +23,16 @@ Format = Literal[1, 2, 3, 4]
 
 ```python
 class Thread(TypedDict):
-    guild_id: str
-    channel_id: str
-    author_id: str
-    thread_info: ThreadInfo
+    guild_id: str        # 频道 ID
+    channel_id: str      # 子频道 ID
+    author_id: str       # 作者 ID
+    thread_info: ThreadInfo  # 帖子信息
 
 class ThreadInfo(TypedDict):
-    thread_id: str
-    title: str
-    content: str
-    date_time: str
+    thread_id: str   # 帖子 ID
+    title: str       # 帖子标题
+    content: str     # 帖子内容
+    date_time: str   # 发布时间
 ```
 
 ---
@@ -41,16 +41,16 @@ class ThreadInfo(TypedDict):
 
 ```python
 class Post(TypedDict):
-    guild_id: str
-    channel_id: str
-    author_id: str
-    post_info: PostInfo
+    guild_id: str      # 频道 ID
+    channel_id: str    # 子频道 ID
+    author_id: str     # 作者 ID
+    post_info: PostInfo  # 评论信息
 
 class PostInfo(TypedDict):
-    thread_id: str
-    post_id: str
-    content: str
-    date_time: str
+    thread_id: str  # 所属帖子 ID
+    post_id: str    # 评论 ID
+    content: str    # 评论内容
+    date_time: str  # 发布时间
 ```
 
 ---
@@ -59,17 +59,17 @@ class PostInfo(TypedDict):
 
 ```python
 class Reply(TypedDict):
-    guild_id: str
-    channel_id: str
-    author_id: str
-    reply_info: ReplyInfo
+    guild_id: str      # 频道 ID
+    channel_id: str    # 子频道 ID
+    author_id: str     # 作者 ID
+    reply_info: ReplyInfo  # 回复信息
 
 class ReplyInfo(TypedDict):
-    thread_id: str
-    post_id: str
-    reply_id: str
-    content: str
-    date_time: str
+    thread_id: str  # 所属帖子 ID
+    post_id: str    # 所属评论 ID
+    reply_id: str   # 回复 ID
+    content: str    # 回复内容
+    date_time: str  # 发布时间
 ```
 
 ---
@@ -80,15 +80,15 @@ class ReplyInfo(TypedDict):
 
 ```python
 class AuditResult(TypedDict):
-    guild_id: str
-    channel_id: str
-    author_id: str
-    thread_id: str
-    post_id: str
-    reply_id: str
-    type: AuditType  # 1=帖子, 2=评论, 3=回复
-    result: int
-    err_msg: str
+    guild_id: str    # 频道 ID
+    channel_id: str  # 子频道 ID
+    author_id: str   # 作者 ID
+    thread_id: str   # 帖子 ID
+    post_id: str     # 评论 ID
+    reply_id: str    # 回复 ID
+    type: AuditType  # 审核类型（1=帖子, 2=评论, 3=回复）
+    result: int      # 审核结果（0=通过, 1=不通过, 2=忽略）
+    err_msg: str     # 错误信息
 ```
 
 ---
@@ -99,8 +99,8 @@ class AuditResult(TypedDict):
 
 ```python
 class ForumRsp(TypedDict):
-    threads: List[Thread]
-    is_finish: int
+    threads: List[Thread]  # 帖子列表
+    is_finish: int         # 是否已获取完成（0=未完成, 1=已完成）
 ```
 
 ---
@@ -111,8 +111,8 @@ class ForumRsp(TypedDict):
 
 ```python
 class PostThreadRsp(TypedDict):
-    task_id: str
-    create_time: str
+    task_id: str      # 任务 ID
+    create_time: str  # 创建时间
 ```
 
 ---
@@ -123,9 +123,9 @@ class PostThreadRsp(TypedDict):
 
 ```python
 class OpenForumEvent(TypedDict):
-    guild_id: str
-    channel_id: str
-    author_id: str
+    guild_id: str    # 频道 ID
+    channel_id: str  # 子频道 ID
+    author_id: str   # 作者 ID
 ```
 
 ---
