@@ -30,7 +30,7 @@ export default defineConfig({
             { text: '扩展功能', link: '/extensions/' },
             { text: '示例', link: '/examples/' },
             {
-                text: 'GitHub',
+                text: 'Source',
                 link: 'https://github.com/tencent-connect/botpy',
             },
         ],
@@ -169,7 +169,7 @@ export default defineConfig({
         socialLinks: [
             {
                 icon: 'github',
-                link: 'https://github.com/tencent-connect/botpy',
+                link: 'https://github.com/SilverLi0x10/new-botpy-docs',
             },
         ],
     },

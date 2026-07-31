@@ -1,12 +1,12 @@
-# qq-botpy 文档站
+![SOCIALIFY-new-botpy-docs](https://socialify.git.ci/SilverLi0x10/new-botpy-docs/image?custom_language=Python&description=1&font=KoHo&language=1&logo=https%3A%2F%2Fraw.githubusercontent.com%2Ftencent-connect%2Fbot-docs%2Fmain%2Fdocs%2F.vuepress%2Fpublic%2Ffavicon-64px.png&name=1&owner=1&pattern=Circuit+Board&theme=Auto)
 
-[QQ Bot Python SDK](https://github.com/tencent-connect/botpy)（`qq-botpy`）的**非**官方文档站点源码，基于 [VitePress](https://vitepress.dev/) 构建。
+✨ [QQBot Python SDK](https://github.com/tencent-connect/botpy) · [机器人开放平台API](https://bot.q.qq.com/wiki/develop/api-v2/) ✨
 
-覆盖**频道、私信、群聊、C2C、音频、论坛、日程**等全部 QQ 机器人能力，包含使用指南、API 参考、事件列表、数据模型、扩展功能和 20+ 完整示例。
+本文档覆盖**频道、私信、群聊、C2C、音频、论坛、日程**等全部 QQ 机器人能力，包含使用指南、API 参考、事件列表、数据模型、扩展功能和 20+ 完整示例。
 
-## 本地开发
+## 本地部署
 
-环境要求：Node.js ≥ 18
+环境要求：`Node.js ≥ 20`
 
 ```bash
 # 安装依赖
@@ -45,8 +45,3 @@ npm run docs:preview
 1. 修改对应的 `.md` 文件（新增页面时同步更新 `.vitepress/config.mts` 中的侧边栏）
 2. 本地运行 `npm run docs:dev` 预览效果
 3. 提交 PR
-
-## 相关链接
-
-- SDK 源码：[tencent-connect/botpy](https://github.com/tencent-connect/botpy)
-- 在线文档：[botpy](https://silverli0x10.github.io/new-botpy-docs)
