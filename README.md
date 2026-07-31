@@ -1,52 +1,52 @@
----
-layout: home
+# qq-botpy 文档站
 
-hero:
-  name: QQ Bot Python SDK
-  text: 基于机器人开放平台API实现的QQ机器人框架
-  image:
-    src: https://github.com/tencent-connect/bot-docs/raw/main/docs/.vuepress/public/favicon-64px.png
-    alt: QQ Bot Python SDK
-  actions:
-    - theme: brand
-      text: 快速开始
-      link: /guide/
-    - theme: alt
-      text: API 参考
-      link: /api/
+[QQ Bot Python SDK](https://github.com/tencent-connect/botpy)（`qq-botpy`）的**非**官方文档站点源码，基于 [VitePress](https://vitepress.dev/) 构建。
 
-features:
-  - title: 简单易用
-    details: 简洁的 API 设计，只需继承 Client 类并实现事件处理方法即可快速构建机器人。
-  - title: 异步驱动
-    details: 基于 asyncio 和 aiohttp 实现，支持高性能的异步事件处理和并发连接。
-  - title: 功能全面
-    details: 覆盖频道、私信、群聊、C2C、音频、论坛、日程等所有QQ机器人API。
-  - title: 事件驱动
-    details: WebSocket 实时事件推送，支持频道消息、成员变动、互动回调等多种事件。
-  - title: 扩展丰富
-    details: 内置指令系统、定时任务、YAML配置、颜色转换等实用扩展模块。
-  - title: 示例完善
-    details: 20+ 完整示例代码，覆盖各种消息类型和业务场景。
----
+覆盖**频道、私信、群聊、C2C、音频、论坛、日程**等全部 QQ 机器人能力，包含使用指南、API 参考、事件列表、数据模型、扩展功能和 20+ 完整示例。
 
-## 快速上手
+## 本地开发
 
-```python
-import botpy
-from botpy.message import Message
-
-class MyClient(botpy.Client):
-    async def on_at_message_create(self, message: Message):
-        await message.reply(content=f"收到你的@消息了: {message.content}")
-
-intents = botpy.Intents(public_guild_messages=True)
-client = MyClient(intents=intents)
-client.run(appid="你的appid", secret="你的secret")
-```
-
-### 安装
+环境要求：Node.js ≥ 18
 
 ```bash
-pip install qq-botpy
+# 安装依赖
+npm install
+
+# 启动开发服务器（默认 http://localhost:5173）
+npm run docs:dev
+
+# 构建静态站点（输出到 .vitepress/dist）
+npm run docs:build
+
+# 预览构建产物
+npm run docs:preview
 ```
+
+## 目录结构
+
+```
+.
+├── .vitepress/
+│   ├── config.mts          # 站点配置：导航、侧边栏、搜索、editLink 等
+│   └── theme/              # 自定义主题样式
+├── guide/                  # 使用指南：安装、快速开始、配置、Client、Intents、日志
+├── api/                    # API 参考：Guild、Channel、Message、DM、Group、C2C 等接口
+├── events/                 # 事件列表：频道、消息、成员、互动、音频、论坛等 WebSocket 事件
+├── models/                 # 数据模型：消息、频道、用户、论坛、富文本等 TypedDict 定义
+├── extensions/             # 扩展功能：指令系统、定时任务、YAML 配置、频道跳转、颜色转换
+├── examples/               # 示例代码：20+ 完整示例
+└── index.md                # 首页
+```
+
+## 贡献文档
+
+文档均为 Markdown 编写，欢迎提交 PR：
+
+1. 修改对应的 `.md` 文件（新增页面时同步更新 `.vitepress/config.mts` 中的侧边栏）
+2. 本地运行 `npm run docs:dev` 预览效果
+3. 提交 PR
+
+## 相关链接
+
+- SDK 源码：[tencent-connect/botpy](https://github.com/tencent-connect/botpy)
+- 在线文档：[botpy](https://silverli0x10.github.io/botpy)
