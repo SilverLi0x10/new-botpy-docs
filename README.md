@@ -49,4 +49,4 @@ npm run docs:preview
 ## 相关链接
 
 - SDK 源码：[tencent-connect/botpy](https://github.com/tencent-connect/botpy)
-- 在线文档：[botpy](https://silverli0x10.github.io/botpy)
+- 在线文档：[botpy](https://silverli0x10.github.io/new-botpy-docs)
