@@ -2,46 +2,121 @@
 
 SDK 使用两种方式表示数据：
 
-1. **TypedDict 类型**（`botpy.types`）— API 请求/响应的数据结构，提供类型提示的字典
-2. **领域模型**（`botpy.message.*`, `botpy.guild.*` 等）— 事件回调中使用的 Python 对象，封装了数据访问
+1. **TypedDict / 普通数据类**（`botpy.types`）— API 请求/响应的数据结构，提供类型提示的字典，通过键访问数据
+2. **领域模型**（`botpy.message.*`、`botpy.guild.*` 等）— 事件回调中使用的 Python 对象，通过 `__slots__` 封装数据并绑定 `_api` 实例，可调用 API 方法
 
-## TypedDict 类型定义
+## 表格约定
 
-定义在 `botpy/types/` 目录下，主要用于 API 方法的参数和返回值类型提示。所有 TypedDict 都是字典类型，通过键访问数据。
+- 每个类型单独成节，标题为该类型的名称；对同名（TypedDict 与领域模型）或需补充说明的类型，标题会附加中文注释，如 `Message (类型)`、`Message (领域模型)`。
+- 每个类型使用三列表格列出**全部**变量：`变量名称 | 变量类型 | 语义说明`。
+- 变量类型为 SDK 内部类型时，类型名会链接到对应文档小节。
+- 部分 `Literal` 字面量别名（如 `AuditType`、`AudioStatus`）没有命名变量，使用 `取值 | 语义说明` 两列表格说明其合法取值。
+- 已声明但无法从源码确定或未初始化的变量，语义标注为 **待确认**。
 
-| 分类 | 文件 | 内容 |
-|------|------|------|
-| [消息](message.md) | [`types/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/message.py)、[`types/gateway.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/gateway.py) | Message, MessagePayload, DirectMessagePayload, MessageAuditPayload, Embed, Ark, Markdown, Keyboard, Media, Attachment, DmsPayload, MessagesPager, TypesEnum 等 |
-| [频道](guild.md) | [`types/guild.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/guild.py) | GuildPayload, Role, GuildRole, GuildRoles, GuildMembers |
-| [子频道](channel.md) | [`types/channel.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/channel.py) | ChannelPayload, ChannelType, ChannelSubType, ChannelPermissions |
-| [用户](user.md) | [`types/user.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/user.py) | User, Member, GuildMemberPayload |
-| [内联键盘](inline.md) | [`types/inline.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/inline.py) | Keyboard, Button, Action, Permission, RenderData |
-| [论坛](forum.md) | [`types/forum.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/forum.py) | Thread, Post, Reply, AuditResult, ForumRsp, PostThreadRsp, OpenForumEvent |
-| [富文本](rich-text.md) | [`types/rich_text.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/types/rich_text.py) | RichText, Elem, Paragraph, RichObject, AuditType, RichType, AtType 等 |
-| [其他](other.md) | `types/*` | WsContext, ReadyEvent, Announce, Audio, Emoji, Permission, PinsMessage, Reaction, Schedule, Robot, Session, Interaction 等 |
+## 类型索引
 
-## 领域模型类
+### 消息类型（[message.md](message.md)）
 
-定义在 `botpy/` 根目录下，通过 `__slots__` 优化内存使用。事件回调中接收的是这些类的实例。
+| 类型 | 说明 |
+|---|---|
+| [MessagePayload](message.md#messagepayload) | 基础消息数据结构 |
+| [DirectMessagePayload](message.md#directmessagepayload) | 私信消息数据结构 |
+| [MessageAuditPayload](message.md#messageauditpayload) | 消息审核事件载荷 |
+| [UserPayload](message.md#userpayload) | 用户基础信息（网关） |
+| [MessageRefPayload](message.md#messagerefpayload) | 消息引用信息 |
+| [MessageAttachPayload](message.md#messageattachpayload) | 消息附件信息 |
+| [Attachment](message.md#attachment) / [Thumbnail](message.md#thumbnail) | 附件 / 缩略图 |
+| [EmbedField](message.md#embedfield) / [Embed](message.md#embed) | Embed 消息 |
+| [ArkObjKv](message.md#arkobjkv) / [ArkObj](message.md#arkobj) / [ArkKv](message.md#arkkv) / [Ark](message.md#ark-模板消息) | Ark 模板消息 |
+| [Reference](message.md#reference-消息引用) | 消息引用配置 |
+| [MessageMarkdownParams](message.md#messagemarkdownparams) / [MarkdownPayload](message.md#markdownpayload) | Markdown 消息 |
+| [KeyboardPayload](message.md#keyboardpayload) | 内联键盘消息 |
+| [Media](message.md#media-富媒体) | 富媒体消息 |
+| [Message](message.md#message-类型) | 完整消息类型（继承 MessagePayload） |
+| [TypesEnum](message.md#typesenum-消息分页方向) / [MessagesPager](message.md#messagespager) | 消息分页 |
+| [DmsPayload](message.md#dmspayload) | 私信会话响应 |
+| [DMOriginalAuthor](message.md#dmoriginalauthor) / [DeletedMessage](message.md#deletedmessage) / [DeletionOperator](message.md#deletionoperator) / [DeletedMessageInfo](message.md#deletedmessageinfo) | 消息删除相关 |
 
-| 类 | 文件 | 用途 |
-|-----|------|------|
-| `Guild` | [`botpy/guild.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/guild.py) | 频道事件回调参数 |
-| `Channel` | [`botpy/channel.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/channel.py) | 子频道事件回调参数 |
-| `Message` | [`botpy/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py) | 公域/私域消息事件回调参数，提供 `reply()` 方法 |
-| `DirectMessage` | [`botpy/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py) | 私信消息事件回调参数，提供 `reply()` 方法 |
-| `GroupMessage` | [`botpy/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py) | 群消息事件回调参数，提供 `reply()` 方法 |
-| `C2CMessage` | [`botpy/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py) | C2C 消息事件回调参数，提供 `reply()` 方法 |
-| `MessageAudit` | [`botpy/message.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/message.py) | 消息审核事件回调参数 |
-| `Member` | [`botpy/user.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/user.py) | 成员事件回调参数 |
-| `Reaction` | [`botpy/reaction.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/reaction.py) | 表态事件回调参数 |
-| `Audio` | [`botpy/audio.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/audio.py) | 音频事件回调参数 |
-| `PublicAudio` | [`botpy/audio.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/audio.py) | 音视频子频道成员事件回调参数 |
-| `Interaction` | [`botpy/interaction.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/interaction.py) | 互动事件回调参数 |
-| `Thread` | [`botpy/forum.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/forum.py) | 私域论坛事件回调参数 |
-| `OpenThread` | [`botpy/forum.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/forum.py) | 开放论坛事件回调参数 |
-| `GroupManageEvent` | [`botpy/manage.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/manage.py) | 群管理事件回调参数 |
-| `C2CManageEvent` | [`botpy/manage.py`](https://github.com/tencent-connect/botpy/tree/master/botpy/manage.py) | C2C 管理事件回调参数 |
+**领域模型：** [Message](message.md#message-领域模型)（含内嵌 `_User`/`_Member`/`_MessageRef`/`_Attachments`）、[DirectMessage](message.md#directmessage-领域模型)、[MessageAudit](message.md#messageaudit-领域模型)、[BaseMessage](message.md#basemessage-领域模型)、[GroupMessage](message.md#groupmessage-领域模型)、[C2CMessage](message.md#c2cmessage-领域模型)
+
+### 频道类型（[guild.md](guild.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [GuildPayload](guild.md#guildpayload) | 频道数据结构 |
+| [Role](guild.md#role-身份组) | 身份组 |
+| [GuildRole](guild.md#guildrole) / [GuildRoles](guild.md#guildroles) | 身份组详情 / 列表 |
+| [GuildMembers](guild.md#guildmembers) | 频道成员列表 |
+
+**领域模型：** [Guild](guild.md#guild-领域模型)
+
+### 子频道类型（[channel.md](channel.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [ChannelType](channel.md#channeltype-枚举) / [ChannelSubType](channel.md#channelsubtype-枚举) / [PrivateType](channel.md#privatetype-枚举) / [SpeakPermission](channel.md#speakpermission-枚举) | 子频道相关枚举 |
+| [ChannelPayload](channel.md#channelpayload) | 子频道数据结构 |
+| [ChannelPermissions](channel.md#channelpermissions) | 子频道权限 |
+
+**领域模型：** [Channel](channel.md#channel-领域模型)
+
+### 用户与成员类型（[user.md](user.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [User](user.md#user) | 用户信息 |
+| [Member](user.md#member) | 成员信息 |
+| [GuildMemberPayload](user.md#guildmemberpayload) | 频道成员信息 |
+
+**领域模型：** [Member](user.md#member-领域模型)（含内嵌 `_User`）
+
+### 内联键盘类型（[inline.md](inline.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [Keyboard](inline.md#keyboard) / [KeyboardRow](inline.md#keyboardrow) | 键盘结构 |
+| [Button](inline.md#button) / [RenderData](inline.md#renderdata) / [Action](inline.md#action) / [Permission](inline.md#permission) | 按钮及行为 |
+
+### 论坛类型（[forum.md](forum.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [Format](forum.md#format-字面量别名) | 帖子内容格式 |
+| [ThreadInfo](forum.md#threadinfo) / [Thread](forum.md#thread-帖子) | 帖子 |
+| [PostInfo](forum.md#postinfo) / [Post](forum.md#post-评论) | 评论 |
+| [ReplyInfo](forum.md#replyinfo) / [Reply](forum.md#reply-回复) | 回复 |
+| [AuditResult](forum.md#auditresult) | 发布审核结果 |
+| [ForumRsp](forum.md#forumrsp) / [PostThreadRsp](forum.md#postthreadrsp) | 响应结构 |
+| [OpenForumEvent](forum.md#openforumevent) | 开放论坛事件数据 |
+
+**领域模型：** [Thread](forum.md#thread-领域模型)（含内嵌富文本结构）、[OpenThread](forum.md#openthread-领域模型)
+
+### 富文本类型（[rich-text.md](rich-text.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [AuditType](rich-text.md#audittype) / [RichType](rich-text.md#richtype) / [AtType](rich-text.md#attype) / [ElemType](rich-text.md#elemtype) / [Alignment](rich-text.md#alignment) | 字面量别名 |
+| [RichText](rich-text.md#richtext) / [Paragraph](rich-text.md#paragraph) / [ParagraphProps](rich-text.md#paragraphprops) | 富文本整体结构 |
+| [Elem](rich-text.md#elem) / [TextElem](rich-text.md#textelem) / [TextProps](rich-text.md#textprops) / [ImageElem](rich-text.md#imageelem) / [PlatImage](rich-text.md#platimage) / [VideoElem](rich-text.md#videoelem) / [PlatVideo](rich-text.md#platvideo) / [URLElem](rich-text.md#urlelem) | 元素类型 |
+| [RichObject](rich-text.md#richobject) / [TextInfo](rich-text.md#textinfo) / [AtInfo](rich-text.md#atinfo) / [AtUserInfo](rich-text.md#atuserinfo) / [AtRoleInfo](rich-text.md#atroleinfo) / [AtGuildInfo](rich-text.md#atguildinfo) / [URLInfo](rich-text.md#urlinfo) / [EmojiInfo](rich-text.md#emojiinfo) / [ChannelInfo](rich-text.md#channelinfo) | 富文本对象 |
+
+### 其他类型（[other.md](other.md)）
+
+| 类型 | 说明 |
+|---|---|
+| [WsContext](other.md#wscontext) / [ReadyEvent](other.md#readyevent) / [WsUrlPayload](other.md#wsurlpayload) | 网关基础类型 |
+| [RecommendChannel](other.md#recommendchannel) / [AnnouncesType](other.md#announcestype-枚举) / [Announce](other.md#announce) | 公告 |
+| [AudioStatus](other.md#audiostatus-字面量别名) / [PublicAudioType](other.md#publicaudiotype-字面量别名) / [AudioControl](other.md#audiocontrol) / [AudioAction](other.md#audioaction) / [AudioLive](other.md#audiolive) | 音频控制 |
+| [EmojiType](other.md#emojitype-字面量别名) / [Emoji](other.md#emoji) | 表情 |
+| [APIPermission](other.md#apipermission) / [APIPermissionDemandIdentify](other.md#apipermissiondemandidentify) / [APIPermissionDemand](other.md#apipermissiondemand) | API 权限 |
+| [PinsMessage](other.md#pinsmessage-精华消息) | 精华消息 |
+| [ReactionTargetType](other.md#reactiontargettype-字面量别名) / [ReactionTarget](other.md#reactiontarget) / [Reaction](other.md#reaction) / [ReactionUsers](other.md#reactionusers) | 表情表态 |
+| [RemindType](other.md#remindtype-字面量别名) / [Schedule](other.md#schedule) | 日程 |
+| [Robot](other.md#robot-类型) | 机器人信息 |
+| [ShardConfig](other.md#shardconfig) / [Session](other.md#session) | WebSocket 会话 |
+| [InteractionData](other.md#interactiondata) / [InteractionPayload](other.md#interactionpayload) / [InteractionType](other.md#interactiontype-枚举) / [InteractionDataType](other.md#interactiondatatype-枚举) | 交互 |
+
+**领域模型：** [Robot](other.md#robot-领域模型)、[Token](other.md#token-领域模型)、[Audio](other.md#audio-领域模型)、[PublicAudio](other.md#publicaudio-领域模型)、[Reaction](other.md#reaction-领域模型)（含内嵌 `_Emoji`/`_Target`）、[Interaction](other.md#interaction)（含内嵌 `_Data`/`_Resolved`）、[GroupManageEvent](other.md#groupmanageevent-领域模型)、[C2CManageEvent](other.md#c2cmanageevent-领域模型)
 
 ## 数据流
 
@@ -53,14 +128,14 @@ QQ API 响应 (JSON)
 
 ## 类型映射表
 
-| QQ API 字段 | TypedDict 类型 | 领域模型 |
-|-------------|---------------|---------|
-| guild | `types.guild.GuildPayload` | `botpy.guild.Guild` |
-| channel | `types.channel.ChannelPayload` | `botpy.channel.Channel` |
-| message | `types.gateway.MessagePayload` / `types.message.Message` | `botpy.message.Message` |
-| member | `types.user.Member` / `types.user.GuildMemberPayload` | `botpy.user.Member` |
-| user | `types.user.User` / `types.gateway.UserPayload` | `message._User` (内嵌) |
-| audio | `types.audio.AudioAction` / `types.audio.AudioLive` | `botpy.audio.Audio` / `botpy.audio.PublicAudio` |
-| reaction | `types.reaction.Reaction` | `botpy.reaction.Reaction` |
-| forum | `types.forum.Thread` | `botpy.forum.Thread` |
-| interaction | `types.interaction.InteractionPayload` | `botpy.interaction.Interaction` |
+| QQ API 数据 | TypedDict 类型 | 领域模型 |
+|---|---|---|
+| guild | [GuildPayload](guild.md#guildpayload) | [Guild](guild.md#guild-领域模型) |
+| channel | [ChannelPayload](channel.md#channelpayload) | [Channel](channel.md#channel-领域模型) |
+| message | [MessagePayload](message.md#messagepayload) / [Message](message.md#message-类型) | [Message](message.md#message-领域模型) |
+| member | [Member](user.md#member) / [GuildMemberPayload](user.md#guildmemberpayload) | [Member](user.md#member-领域模型) |
+| user | [User](user.md#user) / [UserPayload](message.md#userpayload) | `Message._User`（内嵌） |
+| audio | [AudioAction](other.md#audioaction) / [AudioLive](other.md#audiolive) | [Audio](other.md#audio-领域模型) / [PublicAudio](other.md#publicaudio-领域模型) |
+| reaction | [Reaction](other.md#reaction) | [Reaction](other.md#reaction-领域模型) |
+| forum | [Thread](forum.md#thread-帖子) | [Thread](forum.md#thread-领域模型) |
+| interaction | [InteractionPayload](other.md#interactionpayload) | [Interaction](other.md#interaction) |
