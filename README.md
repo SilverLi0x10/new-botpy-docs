@@ -1,5 +1,7 @@
 ![SOCIALIFY-new-botpy-docs](https://socialify.git.ci/SilverLi0x10/new-botpy-docs/image?custom_language=Python&description=1&font=KoHo&language=1&logo=https%3A%2F%2Fraw.githubusercontent.com%2Ftencent-connect%2Fbot-docs%2Fmain%2Fdocs%2F.vuepress%2Fpublic%2Ffavicon-64px.png&name=1&owner=1&pattern=Circuit+Board&theme=Auto)
 
+# 更好的 Botpy 文档 || 更详细完善的 QQBot Python SDK 文档
+
 ✨ [QQBot Python SDK](https://github.com/tencent-connect/botpy) · [机器人开放平台API](https://bot.q.qq.com/wiki/develop/api-v2/) ✨
 
 本文档覆盖**频道、私信、群聊、C2C、音频、论坛、日程**等全部 QQ 机器人能力，包含使用指南、API 参考、事件列表、数据模型、扩展功能和 20+ 完整示例。
@@ -38,7 +40,7 @@ npm run docs:preview
 └── index.md                # 首页
 ```
 
-## 贡献文档
+## Contributing
 
 文档均为 Markdown 编写，欢迎提交 PR：
 
